@@ -79,6 +79,7 @@ export class App extends Component {
           height: '100%',
           fontSize: 30,
           color: '#010101',
+          background: '#888b8d2a',
         }}
       >
         <h1>Phonebook</h1>
