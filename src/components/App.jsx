@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactsList/ContactList';
+import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 
 import { nanoid } from 'nanoid';
@@ -25,7 +25,7 @@ export class App extends Component {
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    const newContact = { id: nanoid(6), name: name, number: number };
+    const newContact = { id: nanoid(), name: name, number: number };
     const nameArray = this.state.contacts.map(({ name }) => name);
     if (nameArray.includes(name)) {
       alert(`${name} is already in contacts.`);
@@ -38,7 +38,7 @@ export class App extends Component {
   };
 
 
-  filterContactsr = () => {
+  filterItem = () => {
     const newArray = this.state.contacts.filter(contact => {
       const valueToLow = this.state.filter.toLowerCase();
       return contact.name.toLowerCase().includes(valueToLow);
@@ -50,7 +50,7 @@ export class App extends Component {
     const index = this.state.contacts.findIndex(
       contact => contact.id === contactID
     );
-    const genNewElement = () => {
+    const newItem = () => {
       const array = this.state.contacts;
       let newArray = [];
       for (const element of array) {
@@ -60,15 +60,14 @@ export class App extends Component {
       }
       return newArray;
     };
-    this.setState(({ itm }) => ({ contacts: genNewElement() }));
+    this.setState(({ i }) => ({ contacts: newItem() }));
   };
 
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
-
-  render() {
+render() {
     return (
       <div
         style={{
@@ -78,7 +77,7 @@ export class App extends Component {
           display: 'flex',
           height: '100%',
           fontSize: 30,
-          color: '#010101',
+          color: '#010456',
           background: '#888b8d2a',
         }}
       >
@@ -86,7 +85,7 @@ export class App extends Component {
         <ContactForm handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} handleChange={this.handleChange} />
-        <ContactList onDelete={this.deleteItem} filterArray={this.filterContactsr} />
+        <ContactList onDelete={this.deleteItem} filterArray={this.filterItem} />
       </div>
     );
   }
