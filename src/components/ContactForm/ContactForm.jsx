@@ -14,19 +14,19 @@ export class ContactForm extends React.Component {
 
   state = { ...INITIAL_STATE };
 
-  id = nanoid();
+  ident = nanoid();
 
   render() {
     return (
       <form
         className={styles.form}
-        htmlFor={this.id}
-        onSubmit={this.handleSubmit}
+        htmlFor={this.ident}
+        onSubmit={this.props.handleSubmit}
       >
         <label className={styles.label}>
           Name
           <input
-            id={this.id}
+            id={this.ident}
             className={styles.input}
             type="text"
             name="name"
@@ -36,9 +36,9 @@ export class ContactForm extends React.Component {
           />
         </label>
         <label className={styles.label}>
-          Phone
+          Number
           <input
-            id={this.id}
+            id={this.ident}
             className={styles.input}
             type="tel"
             name="number"
@@ -48,7 +48,8 @@ export class ContactForm extends React.Component {
           />
         </label>
         <button className={styles.btn} type="submit">
-          Add Contact</button>
+          Add Contact
+        </button>
       </form>
     );
   }
